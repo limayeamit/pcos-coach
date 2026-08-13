@@ -1,0 +1,645 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#f5f0e5">
+<title>Bloom • 84 Day PCOS Coach</title>
+<style>
+:root{
+ --ink:#173d72;--ink2:#244b82;--cream:#f7f1e5;--paper:#fffdf8;--blue:#dce9f7;--blue2:#b8d0eb;
+ --sage:#dce9c9;--green:#6d9568;--coral:#ef9a7d;--peach:#f8d7c9;--yellow:#f4d58a;
+ --lav:#e8def4;--muted:#6d7580;--line:#e5dccd;--danger:#b94e4e;
+}
+*{box-sizing:border-box}html{background:var(--cream)}
+body{margin:0;background:
+ radial-gradient(circle at 8% 4%,#fff9 0 5%,transparent 6%),
+ radial-gradient(circle at 90% 12%,#dce9c966 0 7%,transparent 8%),
+ var(--cream);color:#26323f;font:15px/1.45 -apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",sans-serif;padding-bottom:88px}
+button,input,select,textarea{font:inherit}button{border:0;cursor:pointer}
+.appbar{position:sticky;top:0;z-index:30;background:rgba(247,241,229,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);padding:13px 16px calc(10px + env(safe-area-inset-top))}
+.appbar .row{max-width:920px;margin:auto;display:flex;justify-content:space-between;align-items:center}
+.logo{display:flex;align-items:center;gap:9px}.logoMark{width:38px;height:38px;border-radius:14px;background:var(--ink);color:#fff;display:grid;place-items:center;font-size:21px;transform:rotate(-3deg)}
+.logo b{color:var(--ink);font-size:19px}.sub{font-size:11px;color:var(--muted)}
+.level{background:var(--yellow);color:#6c5319;border-radius:99px;padding:7px 10px;font-size:11px;font-weight:800}
+.container{max-width:920px;margin:auto;padding:12px}
+.card{background:rgba(255,253,248,.94);border:1px solid var(--line);border-radius:24px;padding:17px;margin:12px 0;box-shadow:0 5px 18px rgba(41,50,60,.05)}
+.hero{background:var(--ink);color:white;border:0;overflow:hidden;position:relative}.hero:after{content:"";position:absolute;width:150px;height:150px;border:2px dashed #fff7;border-radius:50%;right:-60px;top:-55px}
+.hero h1{margin:6px 0;font-size:28px;letter-spacing:-.5px}.hero p{margin:5px 0}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+.stat{background:var(--blue);border-radius:18px;padding:12px}.stat.sage{background:var(--sage)}.stat.peach{background:var(--peach)}.stat.yellow{background:#fff1c9}.stat b{display:block;font-size:22px;color:var(--ink)}
+.muted{color:var(--muted);font-size:12px}.small{font-size:13px}.tiny{font-size:10px}
+.pill{display:inline-block;padding:5px 9px;border-radius:99px;background:#fff8d9;color:#705615;font-size:11px;font-weight:800}
+.section{display:none}.section.active{display:block}
+.nav{position:fixed;z-index:50;left:0;right:0;bottom:0;background:rgba(255,253,248,.96);backdrop-filter:blur(14px);border-top:1px solid var(--line);padding:7px 7px calc(7px + env(safe-area-inset-bottom));display:grid;grid-template-columns:repeat(5,1fr);gap:4px}
+.nav button{background:transparent;color:#7b7f84;border-radius:16px;padding:7px 2px;font-size:10px;font-weight:700}.nav button.active{background:var(--blue);color:var(--ink)}.nav span{display:block;font-size:20px;line-height:20px;margin-bottom:2px}
+.btn{background:var(--ink);color:white;border-radius:14px;padding:11px 14px;font-weight:800}.btn.alt{background:var(--blue);color:var(--ink)}.btn.sage{background:var(--sage);color:#31542f}.btn.coral{background:var(--coral);color:#6d3325}.btn.danger{background:#fff0ed;color:var(--danger);border:1px solid #edc5bd}
+input,select,textarea{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:13px;background:#fffefa;color:#29323d;outline:none}input:focus,select:focus,textarea:focus{border-color:var(--ink);box-shadow:0 0 0 3px #dce9f755}textarea{min-height:82px;resize:vertical}
+label{display:block;font-weight:700;font-size:12px;margin:9px 0 5px;color:#495462}
+.choice{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.choice button{background:#f1eee6;color:#43505d;text-align:left;border:1px solid var(--line);padding:12px;border-radius:15px;font-weight:750}.choice button.sel{background:var(--blue);color:var(--ink);border:2px solid var(--ink)}
+.onboard{position:fixed;inset:0;background:var(--cream);z-index:100;overflow:auto;padding:18px 14px}.onboardbox{max-width:560px;margin:0 auto;background:var(--paper);border:1px solid var(--line);border-radius:30px;padding:20px;box-shadow:0 12px 40px #24323a18}.onboard h1{color:var(--ink);font-size:31px;line-height:1.05;margin:6px 0}.onboard.hidden{display:none}
+.doodle{display:flex;justify-content:center;margin:2px 0 8px}.doodle svg{width:220px;height:120px}.inkstroke{fill:none;stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}.corstroke{fill:none;stroke:var(--coral);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}.greenstroke{fill:none;stroke:var(--green);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.xpbar{height:11px;background:#e9e4da;border-radius:99px;overflow:hidden}.xpfill{height:100%;background:var(--coral);width:0;border-radius:99px;transition:width .3s}
+.progressRing{width:78px;height:78px;border-radius:50%;background:conic-gradient(var(--coral) var(--p,0%),#e9e4da 0);display:grid;place-items:center}.progressRing:after{content:"";width:58px;height:58px;border-radius:50%;background:var(--paper)}.ringWrap{position:relative}.ringText{position:absolute;inset:0;display:grid;place-items:center;font-weight:900;color:var(--ink)}
+.kpi{display:flex;justify-content:space-between;align-items:center;gap:14px}.score{font-size:36px;font-weight:900;color:var(--ink)}
+.task{display:flex;gap:10px;align-items:center;padding:11px 0;border-bottom:1px dashed var(--line)}.task:last-child{border-bottom:0}.task input{width:21px;height:21px;accent-color:var(--ink)}.task.done .taskText{text-decoration:line-through;opacity:.55}
+.meal{border:1px solid var(--line);border-radius:18px;padding:12px;margin:8px 0;background:#fffdfa}.meal.selected{border:2px solid var(--green);background:#f3f8ed}.mealTop{display:flex;justify-content:space-between;gap:8px}.mealTitle{font-weight:850;color:#2d3c4c}.foodEmoji{font-size:25px}.tag{display:inline-block;background:#f0ede6;border-radius:8px;padding:3px 6px;margin:4px 4px 0 0;font-size:10px;color:#59616a}.macro{font-size:11px;color:#68727b}
+.weekrow,.filterrow{display:flex;gap:7px;overflow:auto;padding-bottom:4px}.weekrow button,.filterrow button{white-space:nowrap}.dayrow{display:flex;align-items:center;justify-content:space-between;gap:10px;border:1px solid var(--line);border-radius:16px;padding:11px;margin:7px 0;background:#fffdfa}
+.chart{height:150px;display:flex;align-items:flex-end;gap:5px;padding:8px 2px;border-bottom:1px solid var(--line)}.col{height:100%;flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:4px}.col i{width:100%;max-width:25px;min-height:3px;background:var(--ink);border-radius:7px 7px 2px 2px}.col small{font-size:8px;color:var(--muted)}
+.badge{display:inline-flex;align-items:center;gap:6px;padding:9px 11px;border-radius:15px;background:#fff5cc;border:1px solid #ead38a;margin:4px;font-weight:800;font-size:12px}.badge.lock{opacity:.42;background:#f0ede7;border-color:var(--line)}
+.coach{background:#fff5cc;border:1px solid #ead38a;color:#67531c;border-radius:18px;padding:13px}.coach.strong{background:#fff0ed;border-color:#edc5bd;color:#793c33}.toast{position:fixed;z-index:120;left:15px;right:15px;bottom:92px;background:var(--ink);color:#fff;padding:13px;border-radius:15px;text-align:center;display:none;box-shadow:0 8px 25px #173d7230}.toast.show{display:block}
+.notice{padding:12px;border-radius:15px;background:#edf5e7;border:1px solid #cbdcb9}.notice.warn{background:#fff0ed;border-color:#edc5bd}
+.divider{height:1px;background:var(--line);margin:14px 0}.flex{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.between{display:flex;justify-content:space-between;align-items:center;gap:10px}.dateNav{display:flex;gap:6px;align-items:center}.dateNav input{max-width:150px}
+.empty{text-align:center;padding:28px 10px;color:var(--muted)}.hidden{display:none!important}
+.quickgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.quickCard{border:1px solid var(--line);border-radius:18px;padding:13px;background:#fffdfa}.quickCard b{display:block;color:var(--ink);margin-bottom:4px}
+@media(min-width:720px){.grid{grid-template-columns:repeat(3,1fr)}.container{padding:18px}.nav{position:sticky;top:0;bottom:auto;max-width:920px;margin:auto;border:0;background:transparent}.nav button{padding:9px 5px}.nav span{display:inline;margin-right:5px}.hero h1{font-size:34px}}
+
+/* ===== PREMIUM WELLNESS VISUAL LAYER ===== */
+:root{
+ --ink:#203b3a;
+ --ink2:#365b57;
+ --cream:#f5f0e5;
+ --paper:#fffdf8;
+ --sage:#dce5d0;
+ --sage2:#edf2e7;
+ --sand:#e8ddca;
+ --blue:#dce8e7;
+ --coral:#d78d72;
+ --gold:#b69b5b;
+ --line:#e6dfd2;
+ --muted:#687572;
+ --shadow:0 10px 35px rgba(46,57,51,.08);
+}
+body{
+ background:
+   radial-gradient(circle at 10% 0%,rgba(216,226,209,.55),transparent 32%),
+   radial-gradient(circle at 100% 30%,rgba(232,217,197,.42),transparent 28%),
+   var(--cream);
+ color:var(--ink);
+}
+body:before{
+ content:"";
+ position:fixed; inset:0; pointer-events:none; z-index:-1;
+ background:
+   linear-gradient(120deg,rgba(255,253,248,.2),rgba(255,253,248,0)),
+   url("https://images.unsplash.com/photo-1497250681960-ef046c08a56e?auto=format&fit=crop&w=1800&q=78") center/cover;
+ opacity:.055;
+}
+.appbar{
+ background:rgba(255,253,248,.88);
+ color:var(--ink);
+ backdrop-filter:blur(18px);
+ -webkit-backdrop-filter:blur(18px);
+ border-bottom:1px solid rgba(32,59,58,.08);
+ box-shadow:0 4px 24px rgba(32,59,58,.06);
+}
+.appbar .pill{background:#e7eee0;color:var(--ink)}
+.card{
+ background:rgba(255,253,248,.92);
+ border:1px solid rgba(80,95,84,.10);
+ box-shadow:var(--shadow);
+ border-radius:22px;
+}
+.hero{
+ position:relative;
+ overflow:hidden;
+ border:0!important;
+ min-height:210px;
+ display:flex;
+ flex-direction:column;
+ justify-content:flex-end;
+ padding:22px!important;
+ color:#fff!important;
+ background-color:#50665b!important;
+ background-size:cover!important;
+ background-position:center!important;
+ box-shadow:0 14px 38px rgba(42,52,47,.14);
+}
+.hero:before{
+ content:""; position:absolute; inset:0;
+ background:linear-gradient(180deg,rgba(22,42,37,.02) 18%,rgba(22,42,37,.78) 100%);
+ z-index:0;
+}
+.hero>*{position:relative;z-index:1}
+#today .hero{
+ background-image:url("https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=1400&q=82")!important;
+}
+#meals .hero{
+ background-image:url("https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&w=1400&q=82")!important;
+}
+#dashboard .hero{
+ background-image:url("https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=1400&q=82")!important;
+}
+#roadmap .hero{
+ background-image:url("https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1400&q=82")!important;
+}
+#badges .hero{
+ background-image:url("https://images.unsplash.com/photo-1499209974431-9dddcece7f88?auto=format&fit=crop&w=1400&q=82")!important;
+}
+#profile .hero{
+ background-image:url("https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1400&q=82")!important;
+}
+.stat{
+ background:linear-gradient(145deg,#eef2e7,#e2eadb);
+ border:1px solid rgba(83,103,83,.08);
+}
+.meal{
+ background:rgba(255,253,248,.9);
+ border-color:#e6dfd2;
+ box-shadow:0 5px 18px rgba(60,70,62,.045);
+}
+.meal.selected{
+ border-color:#7e9a79;
+ background:#f0f4e9;
+}
+.quick button{
+ background:#edf1e7!important;
+ color:var(--ink)!important;
+ border:1px solid #dfe6d8;
+}
+.nav{
+ background:rgba(255,253,248,.93);
+ backdrop-filter:blur(18px);
+ -webkit-backdrop-filter:blur(18px);
+ border-top:1px solid rgba(60,70,62,.08);
+}
+.nav button.active{background:#e8eee0;color:var(--ink)}
+.choice button{background:#f0f2eb;color:var(--ink)}
+.choice button.sel{outline:3px solid #829b7c;background:#e5ecdf}
+.coach{background:#f7f0df;border-color:#e4d4b4;color:#5c5038}
+.badge{background:#f2eee2;border-color:#d9cda9;color:#4f4a3b}
+.notice{background:#f5f0e4;border-left-color:#b79c61}
+input,select,textarea{
+ background:rgba(255,253,248,.96);
+ border-color:#ded8ca;
+}
+button{background:#526f66}
+button.alt{background:#e9eee7;color:var(--ink)}
+button.danger{background:#fff0ec}
+.xpfill{background:#b59a5d}
+.progressRing{background:conic-gradient(#b59a5d var(--p,0%),#e4e8df 0)}
+/* Soft photographic cards make the app feel less like a spreadsheet. */
+.visual-card{
+ min-height:150px; border-radius:22px; overflow:hidden; position:relative;
+ background-size:cover; background-position:center; margin:12px 0;
+ box-shadow:var(--shadow);
+}
+.visual-card:after{
+ content:"";position:absolute;inset:0;
+ background:linear-gradient(90deg,rgba(26,47,43,.74),rgba(26,47,43,.12));
+}
+.visual-card .visual-copy{position:absolute;z-index:2;left:18px;bottom:18px;right:18px;color:#fff}
+.visual-card .visual-copy b{font-size:20px}
+.visual-card .visual-copy p{margin:5px 0 0;font-size:12px;opacity:.9}
+.visual-food{background-image:url("https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=1200&q=80")}
+.visual-walk{background-image:url("https://images.unsplash.com/photo-1501554728187-ce583db33af7?auto=format&fit=crop&w=1200&q=80")}
+.visual-calm{background-image:url("https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1200&q=80")}
+.onboard{
+ background:
+ linear-gradient(145deg,rgba(37,60,55,.82),rgba(67,83,70,.58)),
+ url("https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1800&q=82") center/cover;
+}
+.onboardbox{box-shadow:0 25px 70px rgba(26,39,34,.25)}
+.section h1,.section h2{letter-spacing:-.02em}
+@media(max-width:420px){
+ .hero{min-height:190px}
+ .card{padding:14px}
+ .visual-card{min-height:135px}
+}
+
+
+#summary .hero{background-image:url("https://images.unsplash.com/photo-1499209974431-9dddcece7f88?auto=format&fit=crop&w=1400&q=82")!important}
+#summary .visual-card{background-image:url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1400&q=82")}
+#summary .score{font-size:34px}
+
+.onboard{z-index:9999}
+.onboard.hidden{display:none!important}
+</style>
+</head>
+<body>
+<div id="onboard" class="onboard hidden">
+ <div class="onboardbox">
+  <div class="doodle">
+   <svg viewBox="0 0 240 130" aria-label="cute food doodle">
+    <path class="inkstroke" d="M35 92c16-30 28-48 43-62M54 88c8-15 18-25 31-32M80 75c13-7 25-8 38-3"/>
+    <path class="greenstroke" d="M132 99c-5-28 5-47 25-59 14 18 12 43-5 58-6 5-13 7-20 1z"/>
+    <path class="corstroke" d="M167 32c8-12 22-13 29-3 7 10-1 23-15 22-11-1-17-10-14-19z"/>
+    <circle cx="201" cy="88" r="14" fill="none" stroke="#f4b94e" stroke-width="2.2"/>
+    <path class="inkstroke" d="M195 88c4-7 8-7 12 0-4 6-8 6-12 0z"/>
+    <path class="corstroke" d="M22 111c18-6 35-6 51 0"/>
+   </svg>
+  </div>
+  <span class="pill">84-DAY HEALTH JOURNAL</span>
+  <h1>Let's make the next 84 days count. 🌿</h1>
+  <p class="muted">A cute, structured accountability companion for your food, movement, sleep and consistency. It stores your data on this device.</p>
+  <label>Your name</label><input id="obName" placeholder="What should I call you?">
+  <label>Primary goal</label>
+  <div class="choice" id="goalChoices">
+   <button data-v="fatloss">🌱 Gradual fat loss</button><button data-v="cycle">🌙 Cycle regularity</button>
+   <button data-v="metabolic">💙 Metabolic health</button><button data-v="habits">✨ Consistency & habits</button>
+  </div>
+  <label>Food preference</label>
+  <div class="choice" id="dietChoices">
+   <button data-v="veg">🥬 Vegetarian</button><button data-v="egg">🥚 Eggetarian</button>
+   <button data-v="nonveg">🐟 Non-vegetarian</button><button data-v="vegan">🌿 Vegan</button>
+  </div>
+  <div class="grid">
+   <div><label>Starting weight (kg)</label><input id="obWeight" type="number" step=".1" placeholder="Optional"></div>
+   <div><label>Weight goal (kg)</label><input id="obGoalWeight" type="number" step=".1" placeholder="Optional"></div>
+   <div><label>Height (cm)</label><input id="obHeight" type="number" placeholder="Optional"></div>
+   <div><label>Age</label><input id="obAge" type="number" placeholder="Optional"></div>
+   <div><label>Start date</label><input id="obStart" type="date"></div>
+  </div>
+  <div class="card" style="background:#f6f2e9">
+   <b>My daily accountability targets</b><p class="muted">Use these as personal targets, not medical prescriptions. Adjust with your clinician if needed.</p>
+   <div class="grid"><div><label>Steps</label><input id="obSteps" type="number" value="7000"></div><div><label>Exercise minutes</label><input id="obExercise" type="number" value="30"></div><div><label>Sleep hours</label><input id="obSleep" type="number" step=".5" value="7.5"></div><div><label>Water glasses</label><input id="obWater" type="number" value="8"></div></div>
+  </div>
+  <label>Coach personality</label><select id="obIntensity"><option value="firm">Firm 🌿</option><option value="strict">Strict 🔔</option><option value="gentle">Gentle 🌼</option></select>
+  <button class="btn" style="width:100%;margin-top:10px" onclick="startJourney()">Start my journey →</button>
+ </div>
+</div>
+
+<header class="appbar">
+ <div class="row">
+  <div class="logo"><div class="logoMark">✿</div><div><b>Bloom Coach</b><div class="sub" id="topSub">84-day PCOS health journal</div></div></div>
+  <div class="level" id="levelPill">Seedling · 0 XP</div>
+ </div>
+</header>
+
+<main class="container">
+
+<section id="summary" class="section active">
+ <div class="card hero" style="min-height:250px">
+  <span class="pill">YOUR BLOOM SUMMARY</span>
+  <h1 id="summaryGreeting">Hi there 🌿</h1>
+  <p id="summaryHeadline">Your 84-day journey starts with one small decision today.</p>
+  <div class="xpbar"><div class="xpfill" id="summaryXpFill"></div></div>
+  <p class="small" id="summaryXpText"></p>
+ </div>
+
+ <div class="card">
+  <div class="between">
+   <div>
+    <span class="muted">Your weight journey</span>
+    <div class="score" id="summaryWeightNow">— kg</div>
+   </div>
+   <div class="ringWrap">
+    <div class="progressRing" id="weightRing" style="--p:0%"></div>
+    <div class="ringText" id="weightRingText">0%</div>
+   </div>
+  </div>
+  <div class="divider"></div>
+  <div class="grid3">
+   <div class="stat"><b id="summaryStartWeight">—</b><span class="muted">starting kg</span></div>
+   <div class="stat sage"><b id="summaryGoalWeight">—</b><span class="muted">goal kg</span></div>
+   <div class="stat peach"><b id="summaryToGo">—</b><span class="muted">kg to go</span></div>
+  </div>
+  <p class="muted" id="summaryWeightMessage" style="margin-bottom:0"></p>
+ </div>
+
+ <div class="visual-card visual-calm">
+  <div class="visual-copy">
+   <b id="summaryMotivation">Keep going.</b>
+   <p id="summaryMotivationSub">Consistency compounds quietly.</p>
+  </div>
+ </div>
+
+ <div class="card">
+  <div class="between"><h2 style="margin:0">Your position</h2><span class="pill" id="summaryPhase">Foundation</span></div>
+  <div class="grid" style="margin-top:10px">
+   <div class="stat"><b id="summaryDays">0 / 84</b><span class="muted">days logged</span></div>
+   <div class="stat sage"><b id="summaryAdherence">0%</b><span class="muted">mission adherence</span></div>
+   <div class="stat peach"><b id="summarySteps">0</b><span class="muted">avg steps</span></div>
+   <div class="stat yellow"><b id="summaryExercise">0</b><span class="muted">avg exercise min</span></div>
+  </div>
+ </div>
+
+ <div id="summaryCoach" class="coach"></div>
+
+ <div class="card">
+  <div class="between"><h2 style="margin:0">Today's best next step</h2><button class="btn alt" onclick="showTab('today')">Open today's sheet</button></div>
+  <p class="muted" id="summaryNextStep" style="margin-bottom:0">Complete your daily sheet and hit three simple missions. 🌱</p>
+ </div>
+</section>
+
+<section id="today" class="section active">
+ <div class="card hero">
+  <span class="pill" id="datePill"></span><h1 id="greeting">Your day starts here.</h1><p id="coachLine"></p>
+  <div class="xpbar"><div class="xpfill" id="xpFill"></div></div><p class="small" id="xpText"></p>
+ </div>
+ <div class="visual-card visual-calm"><div class="visual-copy"><b>Small steps. Real change.</b><p>Your body does not need perfection. It needs consistency.</p></div></div>
+<div id="coachAlert" class="coach"></div>
+ <div class="card">
+  <div class="grid3">
+   <div class="stat"><b id="dayNo">1</b><span class="muted">journey day</span></div>
+   <div class="stat sage"><b id="streak">0</b><span class="muted">day streak</span></div>
+   <div class="stat peach"><b id="todayXP">0</b><span class="muted">XP today</span></div>
+  </div>
+ </div>
+ <div class="card">
+  <div class="kpi"><div><span class="muted">Today's completion</span><div class="score" id="todayScore">0%</div><span class="small" id="scoreMessage"></span></div><div class="ringWrap"><div class="progressRing" id="todayRing" style="--p:0%"></div><div class="ringText" id="ringText">0%</div></div></div>
+ </div>
+ <div class="card">
+  <div class="between"><b>Daily sheet</b><span class="pill" id="sheetStatus">Not submitted</span></div>
+  <div class="dateNav" style="margin-top:10px"><button class="btn alt" onclick="moveDate(-1)">‹</button><input id="viewDate" type="date" onchange="changeViewDate(this.value)"><button class="btn alt" onclick="moveDate(1)">›</button><button class="btn alt" onclick="goToday()">Today</button></div>
+  <p class="muted">Every date has its own sheet. Save it when you are done. Past sheets stay intact.</p>
+ </div>
+
+ <div class="card">
+  <div class="between"><h2 style="margin:0">Today's mission</h2><span class="muted">5 little wins</span></div>
+  <div id="tasks"></div>
+ </div>
+
+ <div class="card">
+  <div class="between"><h2 style="margin:0">Meal picks 🍽️</h2><button class="btn alt" onclick="showTab('meals')">Full library</button></div>
+  <p class="muted">Pick one breakfast, lunch, snack and dinner. Each choice contributes estimated calories and protein.</p>
+  <div id="todayMeals"></div>
+  <div class="stat yellow"><b id="mealTotal">0 kcal · 0g protein</b><span class="muted">selected menu estimate</span></div>
+ </div>
+
+ <div class="card">
+  <div class="between"><h2 style="margin:0">Quick wins ⚡</h2><span class="muted">shortcuts, not another log</span></div>
+  <div class="quickgrid" style="margin-top:10px">
+   <div class="quickCard"><b>🚶 10-minute walk</b><span class="muted">Adds 10 exercise minutes.</span><button class="btn sage" style="margin-top:8px" onclick="quickLog('walk')">Do it</button></div>
+   <div class="quickCard"><b>💧 Water top-up</b><span class="muted">Adds one glass.</span><button class="btn alt" style="margin-top:8px" onclick="quickLog('water')">Log it</button></div>
+   <div class="quickCard"><b>🥚 Protein anchor</b><span class="muted">Choose a protein-rich meal.</span><button class="btn alt" style="margin-top:8px" onclick="showTab('meals')">Choose</button></div>
+   <div class="quickCard"><b>🌙 Wind-down</b><span class="muted">Start a 30-minute no-screen window.</span><button class="btn coral" style="margin-top:8px" onclick="quickLog('winddown')">Start</button></div>
+  </div>
+ </div>
+
+ <div class="card">
+  <div class="between"><h2 style="margin:0">Log today's numbers</h2><span class="muted">source of truth</span></div>
+  <div class="grid">
+   <div><label>Weight (kg)</label><input id="logWeight" type="number" step=".1"></div>
+   <div><label>Steps</label><input id="logSteps" type="number"></div>
+   <div><label>Exercise minutes</label><input id="logExercise" type="number"></div>
+   <div><label>Sleep hours</label><input id="logSleep" type="number" step=".1"></div>
+   <div><label>Water glasses</label><input id="logWater" type="number"></div>
+   <div><label>Energy 0–10</label><input id="logEnergy" type="number" min="0" max="10"></div>
+   <div><label>Hunger 0–10</label><input id="logHunger" type="number" min="0" max="10"></div>
+   <div><label>Meals on plan 0–4</label><input id="logMeals" type="number" min="0" max="4"></div>
+  </div>
+  <label>Notes / cravings / wins</label><textarea id="logNotes" placeholder="What happened today?"></textarea>
+  <button class="btn" style="margin-top:8px" onclick="saveDaily()">✓ Submit today's entry</button>
+ </div>
+</section>
+
+<section id="meals" class="section">
+ <div class="card hero"><span class="pill">84 DAYS · 4 MEAL SLOTS</span><h1>The Bloom meal book 🥑</h1><p>A full three-month menu. Filter by diet and browse week by week.</p></div>
+ <div class="filterrow" id="dietFilters"></div>
+ <div class="visual-card visual-food"><div class="visual-copy"><b>Food that feels like food.</b><p>Simple, colourful, protein-forward meals for the journey.</p></div></div><div class="weekrow" id="mealWeeks"></div>
+ <div id="mealLibrary"></div>
+</section>
+
+<section id="roadmap" class="section"><div class="visual-card visual-calm"><div class="visual-copy"><b>Your roadmap</b><p>Build the foundation, then layer the habits.</p></div></div>
+ <div class="card hero"><span class="pill">YOUR ROADMAP</span><h1>84 days, one chapter at a time 🌱</h1><p>Each phase has a different job. You don't need perfection, you need repetition.</p></div>
+ <div id="roadmapBody"></div>
+</section>
+
+<section id="dashboard" class="section">
+ <div class="card hero"><span class="pill">YOUR DATA</span><h1>Your progress garden 📊</h1><p>Look for trends, not verdicts. A messy day is just one dot.</p></div>
+ <div class="grid3">
+  <div class="stat"><b id="dashAdherence">0%</b><span class="muted">mission adherence</span></div>
+  <div class="stat sage"><b id="dashSteps">0</b><span class="muted">avg steps</span></div>
+  <div class="stat peach"><b id="dashExercise">0</b><span class="muted">avg exercise min</span></div>
+ </div>
+ <div class="card"><h2>Food dashboard 🍽️</h2><div class="grid3"><div class="stat"><b id="dashMealPlan">0%</b><span class="muted">meal slots selected</span></div><div class="stat sage"><b id="dashProtein">0g</b><span class="muted">avg protein*</span></div><div class="stat yellow"><b id="dashKcal">0</b><span class="muted">avg kcal*</span></div></div><div class="chart" id="foodChart"></div><p class="muted">*Approximate menu values, not personalised nutrition prescriptions.</p></div>
+ <div class="card"><h2>Movement & sleep</h2><div class="chart" id="movementChart"></div></div>
+ <div class="card"><h2>Coach accountability</h2><div id="accountability"></div></div>
+</section>
+
+<section id="profile" class="section"><div class="visual-card visual-walk"><div class="visual-copy"><b>Your space</b><p>Adjust targets, intensity and reset whenever you need.</p></div></div>
+ <div class="card hero"><span class="pill">YOUR SETTINGS</span><h1 id="profileTitle">Your plan 🌼</h1><p>Change targets without losing your history.</p></div>
+ <div class="card"><h2>Goals & preferences</h2><div class="grid"><div><label>Name</label><input id="pfName"></div><div><label>Starting weight (kg)</label><input id="pfStartWeight" type="number" step=".1"></div><div><label>Weight goal (kg)</label><input id="pfGoalWeight" type="number" step=".1"></div><div><label>Diet</label><select id="pfDiet"><option value="veg">Vegetarian</option><option value="egg">Eggetarian</option><option value="nonveg">Non-vegetarian</option><option value="vegan">Vegan</option></select></div><div><label>Primary goal</label><select id="pfGoal"><option value="fatloss">Gradual fat loss</option><option value="cycle">Cycle regularity</option><option value="metabolic">Metabolic health</option><option value="habits">Consistency & habits</option></select></div><div><label>Coach intensity</label><select id="pfIntensity"><option value="firm">Firm</option><option value="strict">Strict</option><option value="gentle">Gentle</option></select></div></div><button class="btn" style="margin-top:10px" onclick="saveProfile()">Save profile</button></div>
+ <div class="card"><h2>Daily targets</h2><div class="grid"><div><label>Steps</label><input id="pfSteps" type="number"></div><div><label>Exercise minutes</label><input id="pfExercise" type="number"></div><div><label>Sleep hours</label><input id="pfSleep" type="number" step=".5"></div><div><label>Water glasses</label><input id="pfWater" type="number"></div></div><button class="btn alt" style="margin-top:10px" onclick="saveProfile()">Save targets</button></div>
+ <div class="card"><h2>Badges & awards 🏅</h2><p class="muted">Criteria are explicit. A badge unlocks only when its rule is met.</p><div id="badges"></div></div>
+ <div class="card"><h2>Data controls</h2><div class="notice"><b>Local storage</b><br><span class="muted">Your entries live in this browser/device. Clearing site data can remove them.</span></div><div class="flex" style="margin-top:10px"><button class="btn alt" onclick="exportData()">Export backup</button><button class="btn alt" onclick="document.getElementById('importFile').click()">Import backup</button><input id="importFile" class="hidden" type="file" accept=".json" onchange="importData(event)"></div><div class="divider"></div><button class="btn danger" style="width:100%" onclick="resetEverything()">Reset everything & start again</button><p class="muted">Reset clears the profile, all daily entries, meal selections, badges and dashboard numbers, then returns you to onboarding.</p></div>
+</section>
+</main>
+
+<nav class="nav">
+ <button id="navSummary" class="active" onclick="showTab('summary')"><span>◌</span>Summary</button>
+ <button id="navToday" onclick="showTab('today')"><span>☀️</span>Today</button>
+ <button id="navMeals" onclick="showTab('meals')"><span>🍽️</span>Meals</button>
+ <button id="navDashboard" onclick="showTab('dashboard')"><span>◫</span>Data</button>
+ <button id="navProfile" onclick="showTab('profile')"><span>🌼</span>Profile</button>
+</nav>
+<div id="toast" class="toast"></div>
+
+<script>
+const KEY='bloom84_v3';
+const mealBase={
+ breakfast:[
+  {n:'Masala eggs + sautéed vegetables',e:'🥚',k:390,p:27,d:['egg','nonveg']},
+  {n:'Greek yogurt + berries + chia + walnuts',e:'🫐',k:360,p:22,d:['veg','egg','nonveg']},
+  {n:'Moong chilla + paneer filling',e:'🥞',k:410,p:25,d:['veg','egg','nonveg']},
+  {n:'Tofu scramble + avocado toast',e:'🥑',k:400,p:23,d:['vegan','veg','egg','nonveg']},
+  {n:'Vegetable omelette + fruit',e:'🍳',k:370,p:25,d:['egg','nonveg']},
+  {n:'Besan chilla + mint yogurt',e:'🌿',k:380,p:22,d:['veg','egg','nonveg']},
+  {n:'Overnight oats + seeds + yogurt',e:'🥣',k:390,p:20,d:['veg','egg','nonveg']}
+ ],
+ lunch:[
+  {n:'Paneer tikka + greens + cucumber bowl',e:'🥗',k:520,p:31,d:['veg','egg','nonveg']},
+  {n:'Rajma + brown rice + salad + curd',e:'🍛',k:540,p:24,d:['veg','egg','nonveg']},
+  {n:'Grilled fish + quinoa + greens',e:'🐟',k:500,p:38,d:['nonveg']},
+  {n:'Tofu stir-fry + millet',e:'🥦',k:510,p:28,d:['vegan','veg','egg','nonveg']},
+  {n:'Egg curry + roti + salad',e:'🍳',k:530,p:30,d:['egg','nonveg']},
+  {n:'Chole + millet roti + kachumber',e:'🫛',k:520,p:22,d:['veg','egg','nonveg']},
+  {n:'Chicken tikka + salad + dal',e:'🍗',k:540,p:45,d:['nonveg']}
+ ],
+ snack:[
+  {n:'Apple + peanut butter',e:'🍎',k:210,p:7,d:['vegan','veg','egg','nonveg']},
+  {n:'Greek yogurt + cinnamon',e:'🥣',k:150,p:12,d:['veg','egg','nonveg']},
+  {n:'Roasted chana + buttermilk',e:'🌰',k:190,p:10,d:['veg','egg','nonveg']},
+  {n:'Guava + pumpkin seeds',e:'🍐',k:180,p:8,d:['vegan','veg','egg','nonveg']},
+  {n:'2 boiled eggs + cucumber',e:'🥚',k:170,p:13,d:['egg','nonveg']},
+  {n:'Hummus + carrot/cucumber sticks',e:'🥕',k:190,p:7,d:['vegan','veg','egg','nonveg']},
+  {n:'Cottage cheese + berries',e:'🫐',k:190,p:18,d:['veg','egg','nonveg']}
+ ],
+ dinner:[
+  {n:'Palak paneer + roasted vegetables',e:'🥬',k:480,p:30,d:['veg','egg','nonveg']},
+  {n:'Moong dal khichdi + raita + salad',e:'🍲',k:460,p:22,d:['veg','egg','nonveg']},
+  {n:'Grilled fish + sautéed greens',e:'🐟',k:450,p:39,d:['nonveg']},
+  {n:'Tofu curry + cauliflower rice',e:'🥦',k:450,p:28,d:['vegan','veg','egg','nonveg']},
+  {n:'Egg bhurji + vegetable soup',e:'🍳',k:430,p:28,d:['egg','nonveg']},
+  {n:'Lentil soup + roasted vegetables + paneer',e:'🥣',k:470,p:29,d:['veg','egg','nonveg']},
+  {n:'Chicken + broccoli + small millet portion',e:'🍗',k:500,p:43,d:['nonveg']}
+ ]
+};
+const phaseInfo=[
+ {name:'Foundation',range:'Days 1–28',icon:'🌱',desc:'Clean up the environment: regular meals, protein at each meal, vegetables, hydration, walking and a stable sleep window.',focus:['Choose mostly whole/minimally processed foods','Hit your step target on most days','Build a repeatable bedtime'],quest:'Complete 5 of 7 daily missions for 3 weeks.'},
+ {name:'Rhythm',range:'Days 29–56',icon:'🌿',desc:'Make the routine boringly reliable. Increase movement quality and use meal variety without losing structure.',focus:['Add 2–3 purposeful strength/mobility sessions weekly','Keep protein and fibre anchors consistent','Reduce decision fatigue with meal favourites'],quest:'Reach 70% mission adherence over a rolling 14 days.'},
+ {name:'Consolidation',range:'Days 57–84',icon:'🌼',desc:'Turn the protocol into a lifestyle you can keep after day 84, including social meals and imperfect days.',focus:['Practice flexible meals without abandoning the day','Review trends rather than obsessing over single readings','Create your post-day-84 maintenance rules'],quest:'Finish the final 7 days with 5+ completed missions.'}
+];
+let state={profile:null,logs:{},meals:{},quests:{},tab:'today',viewDate:null,mealWeek:1,mealDiet:'all',quick:{}};
+
+function todayISO(){return new Date().toISOString().slice(0,10)}
+function parseDate(s){const [y,m,d]=s.split('-').map(Number);return new Date(y,m-1,d)}
+function iso(d){return new Date(d.getTime()-d.getTimezoneOffset()*60000).toISOString().slice(0,10)}
+function addDays(s,n){const d=parseDate(s);d.setDate(d.getDate()+n);return iso(d)}
+function saveState(){localStorage.setItem(KEY,JSON.stringify(state))}
+function loadState(){try{const x=JSON.parse(localStorage.getItem(KEY));if(x)state={...state,...x}}catch(e){}}
+function fmtDate(s){return parseDate(s).toLocaleDateString(undefined,{day:'numeric',month:'short',year:'numeric'})}
+function journeyDay(s){if(!state.profile)return 1;return Math.max(1,Math.min(84,Math.floor((parseDate(s)-parseDate(state.profile.start))/86400000)+1))}
+function currentPhase(day){return day<=28?0:day<=56?1:2}
+function dietLabel(d){return {veg:'Vegetarian',egg:'Eggetarian',nonveg:'Non-vegetarian',vegan:'Vegan'}[d]||'Vegetarian'}
+function goalLabel(g){return {fatloss:'Gradual fat loss',cycle:'Cycle regularity',metabolic:'Metabolic health',habits:'Consistency & habits'}[g]||'Consistency & habits'}
+
+function startJourney(){
+ const name=document.getElementById('obName').value.trim();const goal=document.querySelector('#goalChoices .sel')?.dataset.v;const diet=document.querySelector('#dietChoices .sel')?.dataset.v;
+ if(!name||!goal||!diet){alert('Please enter your name and choose a goal + food preference.');return}
+ const start=document.getElementById('obStart').value||todayISO();
+ state.profile={name,goal,diet,start,weight:val('obWeight'),goalWeight:val('obGoalWeight'),height:val('obHeight'),age:val('obAge'),activity:1.35,
+  targets:{steps:val('obSteps')||7000,exercise:val('obExercise')||30,sleep:val('obSleep')||7.5,water:val('obWater')||8},intensity:document.getElementById('obIntensity').value};
+ state.viewDate=start;state.logs={};state.meals={};state.quests={};state.quick={};state.tab='summary';saveState();
+ document.getElementById('onboard').classList.add('hidden');renderAll();toast('🌱 Your 84-day journey has begun.');
+}
+function val(id){const n=parseFloat(document.getElementById(id).value);return Number.isFinite(n)?n:null}
+function bindChoices(){
+ document.querySelectorAll('.choice button').forEach(b=>b.onclick=()=>{b.parentElement.querySelectorAll('button').forEach(x=>x.classList.remove('sel'));b.classList.add('sel')})
+}
+function profileComplete(){
+ const p=state.profile;
+ return !!(p && String(p.name||'').trim() && String(p.goal||'').trim() && String(p.diet||'').trim() && String(p.start||'').trim());
+}
+function ensureOnboard(){
+ const modal=document.getElementById('onboard');
+ if(!profileComplete()){
+   modal.classList.remove('hidden');
+ }else{
+   modal.classList.add('hidden');
+ }
+}
+function getLog(date){return state.logs[date]||{submitted:false,tasks:{},weight:'',steps:'',exercise:'',sleep:'',water:'',energy:'',hunger:'',meals:0,notes:''}}
+function getMeals(date){return state.meals[date]||{}}
+function targetDone(date,key){const l=getLog(date),t=state.profile.targets;return key==='steps'?+l.steps>=+t.steps:key==='exercise'?+l.exercise>=+t.exercise:key==='sleep'?+l.sleep>=+t.sleep:key==='water'?+l.water>=+t.water:key==='meals'?+l.meals>=4:false}
+function missionScore(date){let n=0;['steps','exercise','sleep','water','meals'].forEach(k=>{if(targetDone(date,k))n++});return Math.round(n/5*100)}
+function selectedMealData(date){
+ const m=getMeals(date),day=journeyDay(date),diet=state.profile?.diet||'veg',out=[];
+ ['breakfast','lunch','snack','dinner'].forEach(slot=>{const idx=m[slot];if(idx!==undefined){const arr=mealBase[slot].filter(x=>x.d.includes(diet)||diet==='egg'&&x.d.includes('egg'));if(arr[idx])out.push(arr[idx])}})
+ return out
+}
+function totalMealStats(date){return selectedMealData(date).reduce((a,x)=>({k:a.k+x.k,p:a.p+x.p}),{k:0,p:0})}
+function renderAll(){if(!state.profile)return;state.viewDate=state.viewDate||todayISO();renderSummary();renderToday();renderMeals();renderRoadmap();renderDashboard();renderProfile();updateNav()}
+function renderToday(){
+ const d=state.viewDate,day=journeyDay(d),l=getLog(d),phase=phaseInfo[currentPhase(day)],score=missionScore(d),stats=totalMealStats(d),today=d===todayISO();
+ document.getElementById('datePill').textContent=fmtDate(d)+(today?' · TODAY':'');
+ document.getElementById('greeting').textContent=`Hi ${state.profile.name} 🌿`;
+ const mode=state.profile.intensity;let line=score>=80?'That is a strong day. Keep the chain alive.':score>=50?"You're halfway there. Finish the easy wins before the day gets away.":"We are not waiting for motivation. Pick the smallest unfinished win and do it now.";
+ if(mode==='strict'&&score<70)line='Coach check-in: your score is below target. No drama, no excuses. Finish one mission now.';
+ if(mode==='gentle'&&score<50)line='Gentle nudge: one tiny action still counts. Choose the easiest win.';
+ document.getElementById('coachLine').textContent=line;
+ const totalXP=getXP(),level=getLevel(totalXP),next=level.next,cur=level.cur;document.getElementById('levelPill').textContent=`${level.name} · ${totalXP} XP`;document.getElementById('xpFill').style.width=Math.min(100,(totalXP-cur)/(next-cur)*100)+'%';document.getElementById('xpText').textContent=`${next-totalXP} XP to ${level.nextName}`;
+ document.getElementById('dayNo').textContent=day;document.getElementById('streak').textContent=calcStreak();document.getElementById('todayXP').textContent=score*1;
+ document.getElementById('todayScore').textContent=score+'%';document.getElementById('ringText').textContent=score+'%';document.getElementById('todayRing').style.setProperty('--p',score+'%');
+ document.getElementById('scoreMessage').textContent=score>=80?'🌼 Blooming':score>=50?'🌱 Growing':'🌧️ Needs attention';
+ document.getElementById('viewDate').value=d;document.getElementById('sheetStatus').textContent=l.submitted?'✓ Submitted':'Not submitted';document.getElementById('sheetStatus').style.background=l.submitted?'#dce9c9':'#fff5cc';
+ document.getElementById('coachAlert').className='coach'+(score<40?' strong':'');document.getElementById('coachAlert').innerHTML=`<b>${phase.icon} ${phase.name} phase</b><br>${phase.desc}<br><span class="small">Coach target: ${phase.quest}</span>`;
+ renderTasks(d);renderTodayMeals(d,stats);fillLog(l);
+}
+function renderTasks(d){
+ const t=state.profile.targets,l=getLog(d),items=[
+  ['steps',`🚶 ${t.steps.toLocaleString()} steps`,'Movement target'],
+  ['exercise',`🏃 ${t.exercise} minutes of intentional movement`,'Walk, strength, yoga or mobility'],
+  ['sleep',`🌙 ${t.sleep} hours sleep`,'Protect your sleep window'],
+  ['water',`💧 ${t.water} glasses water`,'Spread across the day'],
+  ['meals',`🍽️ 4 planned meal slots`,'Choose from the meal book']
+ ];
+ document.getElementById('tasks').innerHTML=items.map(([k,txt,sub])=>`<div class="task ${targetDone(d,k)?'done':''}"><input type="checkbox" ${targetDone(d,k)?'checked':''} disabled><div class="taskText"><b>${txt}</b><div class="muted">${sub}</div></div></div>`).join('');
+}
+function taskToggle(d,k,checked){}
+function renderTodayMeals(d,stats){
+ const diet=state.profile.diet,m=getMeals(d);let html='';
+ ['breakfast','lunch','snack','dinner'].forEach(slot=>{
+  const arr=mealBase[slot].filter(x=>x.d.includes(diet));const chosen=m[slot];
+  html+=`<div class="small" style="margin-top:10px;font-weight:800;color:var(--ink)">${slot.toUpperCase()}</div>`;
+  html+=arr.slice(0,3).map((x,i)=>`<div class="meal ${chosen===i?'selected':''}" onclick="selectMeal('${d}','${slot}',${i})"><div class="mealTop"><div><span class="foodEmoji">${x.e}</span> <span class="mealTitle">${x.n}</span></div><b>${x.k} kcal</b></div><span class="tag">${dietLabel(diet)}</span><span class="tag">${x.p}g protein</span></div>`).join('');
+ });
+ document.getElementById('todayMeals').innerHTML=html;document.getElementById('mealTotal').textContent=`${stats.k} kcal · ${stats.p}g protein`;
+}
+function selectMeal(d,slot,i){const m=getMeals(d);m[slot]=i;state.meals[d]=m;saveState();renderToday();toast('🍽️ Meal choice saved')}
+function fillLog(l){['Weight','Steps','Exercise','Sleep','Water','Energy','Hunger','Meals'].forEach(x=>document.getElementById('log'+x).value=l[x.toLowerCase()]??'');document.getElementById('logNotes').value=l.notes||''}
+function saveDaily(){
+ const d=state.viewDate,l=getLog(d);l.submitted=true;l.weight=document.getElementById('logWeight').value;l.steps=document.getElementById('logSteps').value;l.exercise=document.getElementById('logExercise').value;l.sleep=document.getElementById('logSleep').value;l.water=document.getElementById('logWater').value;l.energy=document.getElementById('logEnergy').value;l.hunger=document.getElementById('logHunger').value;l.meals=document.getElementById('logMeals').value;l.notes=document.getElementById('logNotes').value;
+ state.logs[d]=l;saveState();renderAll();toast(`✓ ${fmtDate(d)} submitted. Your sheet is saved.`);
+}
+function quickLog(type){
+ const d=state.viewDate,l=getLog(d);
+ if(type==='walk')l.exercise=(+l.exercise||0)+10;
+ if(type==='water')l.water=(+l.water||0)+1;
+ if(type==='winddown')state.quick[d]=(state.quick[d]||0)+1;
+ state.logs[d]=l;saveState();renderToday();toast(type==='walk'?'🚶 +10 movement minutes logged':type==='water'?'💧 +1 glass logged':'🌙 Wind-down started. Phone down when you can.');
+}
+function moveDate(n){state.viewDate=addDays(state.viewDate,n);saveState();renderToday()}
+function changeViewDate(v){if(v){state.viewDate=v;saveState();renderToday()}}
+function goToday(){state.viewDate=todayISO();saveState();renderToday()}
+function showTab(id){state.tab=id;document.querySelectorAll('.section').forEach(s=>s.classList.toggle('active',s.id===id));updateNav();if(id==='summary')renderSummary();if(id==='dashboard')renderDashboard();if(id==='meals')renderMeals();if(id==='roadmap')renderRoadmap();if(id==='profile')renderProfile();window.scrollTo(0,0)}
+function updateNav(){['Summary','Today','Meals','Dashboard','Profile'].forEach(x=>document.getElementById('nav'+x).classList.toggle('active',state.tab===x.toLowerCase()))}
+
+function renderMeals(){
+ const diet=state.mealDiet||'all';document.getElementById('dietFilters').innerHTML=['all','veg','egg','nonveg','vegan'].map(d=>`<button class="btn ${diet===d?'':'alt'}" onclick="state.mealDiet='${d}';renderMeals()">${d==='all'?'All diets':dietLabel(d)}</button>`).join('');
+ document.getElementById('mealWeeks').innerHTML=Array.from({length:12},(_,i)=>`<button class="btn ${state.mealWeek===i+1?'':'alt'}" onclick="state.mealWeek=${i+1};renderMeals()">Week ${i+1}</button>`).join('');
+ const start=(state.mealWeek-1)*7+1,end=Math.min(84,start+6);let html='';
+ for(let day=start;day<=end;day++){const date=addDays(state.profile.start,day-1);html+=`<div class="card"><div class="between"><h2 style="margin:0">Day ${day}</h2><span class="pill">${fmtDate(date)}</span></div>`;
+  ['breakfast','lunch','snack','dinner'].forEach(slot=>{
+   const pool=mealBase[slot].filter(x=>diet==='all'||x.d.includes(diet));const item=pool[(day-1)%pool.length];
+   html+=`<div class="dayrow"><div><b>${slot[0].toUpperCase()+slot.slice(1)}</b><br><span class="small">${item.e} ${item.n}</span><div class="macro">${item.k} kcal · ${item.p}g protein</div></div><button class="btn alt" onclick="selectLibraryMeal('${date}','${slot}','${item.n.replace(/'/g,"\\'")}')">Pick</button></div>`;
+  });html+=`<div class="muted">Daily menu estimate: ${selectedOrSuggestedStats(day,diet).k} kcal · ${selectedOrSuggestedStats(day,diet).p}g protein</div></div>`;
+ }
+ document.getElementById('mealLibrary').innerHTML=html;
+}
+function selectedOrSuggestedStats(day,diet){
+ let k=0,p=0;['breakfast','lunch','snack','dinner'].forEach(slot=>{const pool=mealBase[slot].filter(x=>diet==='all'||x.d.includes(diet));const x=pool[(day-1)%pool.length];k+=x.k;p+=x.p});return{k,p}
+}
+function selectLibraryMeal(date,slot,name){const pool=mealBase[slot].filter(x=>x.d.includes(state.profile.diet));const idx=pool.findIndex(x=>x.n===name);if(idx>=0){const m=getMeals(date);m[slot]=idx;state.meals[date]=m;saveState();toast(`✓ ${slot} selected for ${fmtDate(date)}`)}}
+
+function renderRoadmap(){
+ const day=journeyDay(state.viewDate),p=currentPhase(day);document.getElementById('roadmapBody').innerHTML=phaseInfo.map((x,i)=>`<div class="card" style="border-color:${i===p?'#9ebcda':'var(--line)'}"><div class="between"><div><span style="font-size:28px">${x.icon}</span> <b>${x.name}</b></div><span class="pill">${x.range}</span></div><p>${x.desc}</p><b>Focus</b><ul>${x.focus.map(a=>`<li>${a}</li>`).join('')}</ul><div class="notice"><b>Win condition</b><br><span class="small">${x.quest}</span></div></div>`).join('');
+}
+function completedDates(){return Object.keys(state.logs).filter(d=>state.logs[d].submitted)}
+function avg(key){const a=completedDates().map(d=>+state.logs[d][key]).filter(Number.isFinite);return a.length?Math.round(a.reduce((x,y)=>x+y,0)/a.length):0}
+function renderDashboard(){
+ const dates=completedDates(),ad=dates.length?Math.round(dates.reduce((s,d)=>s+missionScore(d),0)/dates.length):0;
+ document.getElementById('dashAdherence').textContent=ad+'%';document.getElementById('dashSteps').textContent=avg('steps').toLocaleString();document.getElementById('dashExercise').textContent=avg('exercise');
+ let slots=0,possible=dates.length*4,ks=0,ps=0,daysWith=0;dates.forEach(d=>{const s=selectedMealData(d);slots+=s.length;ks+=s.reduce((a,x)=>a+x.k,0);ps+=s.reduce((a,x)=>a+x.p,0);if(s.length)daysWith++});
+ document.getElementById('dashMealPlan').textContent=(possible?Math.round(slots/possible*100):0)+'%';document.getElementById('dashKcal').textContent=daysWith?Math.round(ks/daysWith):0;document.getElementById('dashProtein').textContent=(daysWith?Math.round(ps/daysWith):0)+'g';
+ document.getElementById('foodChart').innerHTML=chartHTML(dates.slice(-14),d=>selectedMealData(d).length*25,'meals');
+ document.getElementById('movementChart').innerHTML=chartHTML(dates.slice(-14),d=>Math.min(100,(+state.logs[d].steps||0)/(state.profile.targets.steps||7000)*100),'steps');
+ const weak=ad<60?`<div class="notice warn"><b>Coach says: we need a reset in execution.</b><br>You have logged ${dates.length} day(s), with average mission adherence of ${ad}%. Tomorrow's only job: submit the sheet and hit 3 of 5 missions.</div>`:`<div class="notice"><b>Coach says: keep the boring consistency.</b><br>Your average adherence is ${ad}%. Protect the routine that is already working.</div>`;
+ document.getElementById('accountability').innerHTML=weak;
+}
+function chartHTML(dates,fn,label){if(!dates.length)return '<div class="empty">Submit a few daily sheets and your trend will grow here 🌱</div>';return dates.map(d=>`<div class="col"><i style="height:${Math.max(3,Math.min(100,fn(d)))}%"></i><small>${parseDate(d).getDate()}</small></div>`).join('')}
+
+function renderProfile(){
+ const p=state.profile;if(!p)return;document.getElementById('profileTitle').textContent=`${p.name}'s plan 🌼`;document.getElementById('pfName').value=p.name;document.getElementById('pfStartWeight').value=p.weight??'';document.getElementById('pfGoalWeight').value=p.goalWeight??'';document.getElementById('pfDiet').value=p.diet;document.getElementById('pfGoal').value=p.goal;document.getElementById('pfIntensity').value=p.intensity;document.getElementById('pfSteps').value=p.targets.steps;document.getElementById('pfExercise').value=p.targets.exercise;document.getElementById('pfSleep').value=p.targets.sleep;document.getElementById('pfWater').value=p.targets.water;renderBadges();
+}
+function saveProfile(){const p=state.profile;p.name=document.getElementById('pfName').value.trim()||p.name;p.weight=val('pfStartWeight');p.goalWeight=val('pfGoalWeight');p.diet=document.getElementById('pfDiet').value;p.goal=document.getElementById('pfGoal').value;p.intensity=document.getElementById('pfIntensity').value;p.targets={steps:+document.getElementById('pfSteps').value||7000,exercise:+document.getElementById('pfExercise').value||30,sleep:+document.getElementById('pfSleep').value||7.5,water:+document.getElementById('pfWater').value||8};saveState();renderAll();toast('✓ Profile and targets saved')}
+function getXP(){return completedDates().reduce((s,d)=>s+missionScore(d),0)+Object.keys(state.meals).reduce((s,d)=>s+Object.keys(state.meals[d]||{}).length*10,0)}
+function getLevel(x){const levels=[['Seedling',0,100,'Sprout'],['Sprout',100,300,'Bloom'],['Bloom',300,600,'Flourish'],['Flourish',600,1000,'Champion'],['Champion',1000,99999,'Champion']];for(const l of levels){if(x<l[2])return{name:l[0],cur:l[1],next:l[2],nextName:l[3]}}return{name:'Champion',cur:1000,next:1200,nextName:'Champion'}}
+function calcStreak(){if(!state.profile)return 0;let d=todayISO(),n=0;for(let i=0;i<84;i++){const x=addDays(d,-i);if(missionScore(x)>=50)n++;else if(i>0)break}return n}
+function badgeData(){
+ const days=completedDates(),scores=days.map(missionScore),avgScore=scores.length?scores.reduce((a,b)=>a+b,0)/scores.length:0,meals=Object.values(state.meals).reduce((s,m)=>s+Object.keys(m||{}).length,0),streak=calcStreak();
+ return [
+  ['🌱','First Step','Submit your first daily sheet',days.length>=1],
+  ['🥚','Protein Picker','Select 12 meal slots',meals>=12],
+  ['🚶','Moving Bloom','Log 150 total exercise minutes',completedDates().reduce((s,d)=>s+(+state.logs[d].exercise||0),0)>=150],
+  ['💧','Hydration Habit','Meet your water target on 7 logged days',days.filter(d=>targetDone(d,'water')).length>=7],
+  ['🌙','Sleep Gardener','Meet your sleep target on 7 logged days',days.filter(d=>targetDone(d,'sleep')).length>=7],
+  ['🔥','7-Day Rhythm','Achieve ≥50% mission score on 7 consecutive days',longestStreak()>=7],
+  ['🌼','Consistency Bloom','Reach ≥70% average adherence across 21 logged days',days.length>=21&&avgScore>=70],
+  ['🏆','84-Day Champion','Submit 60+ daily sheets',days.length>=60]
+ ];
+}
+function longestStreak(){let best=0,cur=0;const ds=new Set(completedDates());for(let i=0;i<84;i++){const d=addDays(state.profile.start,i);if(ds.has(d)&&missionScore(d)>=50){cur++;best=Math.max(best,cur)}else cur=0}return best}
+function renderBadges(){document.getElementById('badges').innerHTML=badgeData().map(b=>`<div class="badge ${b[3]?'':'lock'}">${b[0]} ${b[1]} ${b[3]?'✓':'🔒'}</div><div class="tiny muted" style="margin-left:8px">${b[2]}</div>`).join('<div style="height:6px"></div>')}
+
+function exportData(){const blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='bloom-84-backup.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),500);toast('⬇️ Backup prepared')}
+function importData(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const x=JSON.parse(r.result);if(!x.profile)throw Error();state=x;saveState();renderAll();toast('✓ Backup imported')}catch(err){alert('That backup file is not valid.')}};r.readAsText(f)}
+function resetEverything(){if(!confirm('Reset everything? This permanently clears your profile, logs, meal choices, badges and dashboard data on this device.'))return;localStorage.removeItem(KEY);state={profile:null,logs:{},meals:{},quests:{},tab:'summary',viewDate:null,mealWeek:1,mealDiet:'all',quick:{}};document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.getElementById('summary').classList.add('active');document.getElementById('onboard').classList.remove('hidden');bindChoices();document.getElementById('obStart').value=todayISO();toast('Reset complete · fresh journey ready 🌱')}
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(window._toast);window._toast=setTimeout(()=>t.classList.remove('show'),2200)}
+
+loadState();bindChoices();if(!document.getElementById('obStart').value)document.getElementById('obStart').value=todayISO();ensureOnboard();if(profileComplete()){state.viewDate=state.viewDate||todayISO();state.tab=state.tab||'summary';renderAll();showTab(state.tab)}else{showTab('summary')}
+</script>
+</body></html>
